@@ -1,0 +1,16 @@
+% John Wyeth
+% 400171677
+num_bins = 20;
+alpha = 1;
+beta = 1;
+
+image = imread("ee3tp3picture2020.png");
+image_of_doubles = double(image);
+
+new_image_of_doubles = alpha .* image_of_doubles
+
+[n_elements, centers] = hist(image_of_doubles(:), num_bins);
+bar(centers, n_elements);
+xlim([0, 255]);
+
+%imshow(uint8(image_of_doubles));
