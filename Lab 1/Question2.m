@@ -3,6 +3,8 @@
 
 COLUMNS = 11;
 ROWS = 20;
+% The average of total marks available for each section (lab, midterm and
+% exam)
 LAB_AVG = 31.25;
 MIDTERM_AVG = 50;
 EXAM_AVG = 16.6667;
@@ -23,11 +25,18 @@ EXAM_WEIGHT = 0.4;
 LAB_WEIGHT = 0.3;
 MIDTERM_WEIGHT = 0.3;
 
+% Calculating the final grades for all the students based on the weightings
+% of each section
 final_grades = ( LAB_WEIGHT.*(average_lab_marks(:,2) / LAB_AVG) ) + ( MIDTERM_WEIGHT.*(average_midterm_marks(:,2) / MIDTERM_AVG) ) + ( EXAM_WEIGHT.*(average_exam_marks(:,2) / EXAM_AVG) );
 [sorted_final_grades, sortIndex] = sort(final_grades, 'descend');
 matching_student_IDs = student_IDs(sortIndex);
+% final everything is the final matrix that holds the sorted lab marks and
+% student numbers
 final_everything = horzcat(matching_student_IDs, sorted_final_grades);
 
 figure('Name','Sorted Final Grades (without student IDs)');
+% As the sorted grades is not in order of sequential stuednt number, this
+% plot doesn't include the student number(s), but rather just a counter
+% from 1-20
 plot(final_everything(:,2), 'o');
 
